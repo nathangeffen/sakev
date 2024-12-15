@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="game-1" class="game">
+     {% include "game.html" %}
+</div>
+{% endblock %}
+
+{% block footerscripts %}
+
+{{block.super}}
+<script type="module" src="js/gameux.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io();
+</script>
+
+<script type="module">
+    import {createGameUX} from "/js/ux.js";
+    console.log('Start position: {{ startPosition }}');
+    createGameUX('game-1', {
+        startPosition: '{{ startPosition }}',
+        gameUXState:   {{ gameUXState }},
+        southPlayerID: '{{ south }}',
+        northPlayerID: '{{ north }}',
+        inplay: true,
+        thisSide: '{{ thisSide }}',
+        gameId: '{{gameId}}'
+    });
+</script>
+{% endblock %}

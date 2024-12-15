@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Create a position</h1>
+
+<div id="position-1" class="game">
+        {% include "positionForm.html" %}
+        {% include "positionSetup.html" %}
+</div>
+{% endblock %}
+
+{% block footerscripts %}
+        {{ super() }}
+        <script type="module">
+                import {createGameUX} from "/js/ux.js";
+                createGameUX('position-1');
+        </script>
+{% endblock %}

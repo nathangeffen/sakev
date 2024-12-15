@@ -1,0 +1,130 @@
+.clock, .user-actions, .scoreboard, .position-elements, .north-position-elements, .south-position-elements, .specification, .both-position-elements  {
+        margin-bottom: 9px;
+}
+
+.record, .scoreboard {
+        font-family: monospace;
+}
+
+.scoreboard .result {
+        color: red;
+        white-space: pre;
+}
+
+.record {
+        height: 30vw;
+        overflow-y: scroll;
+        border: 1px solid lightGray;
+        max-width: 700px;
+        padding: 6px;
+}
+
+.record a {
+        white-space: pre;
+        text-decoration: none;
+        color: black;
+}
+
+.record a.north::after {
+        content: "\a";
+}
+
+.record a.south {
+        padding-right: 6px;
+}
+
+.specification-div {
+        margin-top: 9px;
+        margin-bottom: 9px;
+}
+
+.specification-div button, .specification-div a {
+        width: 100px;
+        margin-bottom: 20px;
+}
+
+.specification {
+        width: 300px;
+}
+
+.position-elements div.selected {
+        width: 55px;
+        height: 55px;
+        padding: 4px;
+        margin-right: 4px;
+}
+
+.position-elements div.selected {
+        margin: 12px;
+        height: 50px;
+        width: 50px;
+        border: 1px solid red;
+        border-radius: 5px;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+}
+
+.north-position-elements {
+        border-top: 1px solid gray;
+        padding-top: 6px;
+        margin-top: 6px;
+}
+.setup-board-buttons button {
+        height: 40px;
+        width: 40px;
+}
+
+.north-position-elements button {
+        background-color: gray;
+}
+
+.south-position-elements button {
+        background-color: white;
+}
+
+.both-position-elements button {
+        background-color: lightgray;
+}
+
+.select-position-button {
+        margin-top: 6px;
+}
+
+.position-context {
+        font-size: small;
+}
+
+.position-context div.form-group {
+        margin-top: 3px;
+        margin-bottom: 3px;
+}
+
+.position-context input, .position-context select {
+        height: 19px;
+        width: 60px;
+        font-size: small;
+}
+
+.position-context input[type='checkbox'] {
+        height: 12px;
+        width: 12px;
+}
+
+.position-files-ranks label {
+        margin-top: 9px;
+}
+
+button.selectSavedPositionButton, button.placeInPlayingPool {
+        width: 200px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+}
+
+.message {
+        color: red;
+}
+
+tr.pool-entry {
+        cursor: grab;
+}

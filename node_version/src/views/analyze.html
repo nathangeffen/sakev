@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Analyze</h1>
+
+<div id="game-1" class="game">
+    {% include "game.html" %}
+</div>
+
+{% endblock %}
+
+{% block footerscripts %}
+{{ super() }}
+
+<script type="module">
+    import {createGameUX} from "/js/ux.js";
+    createGameUX('game-1', {
+        startPosition: '{{ startPosition }}'
+    });
+</script>
+
+{% endblock %}

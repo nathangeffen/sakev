@@ -1,0 +1,39 @@
+{
+  "name": "sakev",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "PORT=3000 DB=sakev.db ./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run build\"",
+    "prod": "node src/js/server.js",
+    "build": "tsc && node src/js/server.js",
+    "test": "PORT=0 DB=test.db vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "@types/socket.io-client": "^1.4.36",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.3",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@svgdotjs/svg.draggable.js": "^3.0.4",
+    "@svgdotjs/svg.js": "^3.2.4",
+    "better-sqlite3": "^11.5.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.20.0",
+    "nunjucks": "^3.2.4",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2"
+  },
+  "main": "index.js",
+  "description": ""
+}

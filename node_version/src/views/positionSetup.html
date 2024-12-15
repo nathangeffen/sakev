@@ -1,0 +1,27 @@
+<div class="row positionSetup">
+    <div class="col-xs-12 col-md-6 board-container">
+        <svg class="board">
+        </svg>
+    </div>
+    <div class="col-xs-12 col-sm-6 info">
+        <div class="position-elements">
+            <div class="selected">
+            </div>
+
+            {% include "setupBoardButtons.html" %}
+            {% include "setupBoardForm.html" %}
+
+            <div class="specification-div">
+                <input class="specification" type="text" disabled />
+                <div>
+                    <button type="button" class="btn btn-secondary copy">Copy</button>
+                    <button type="button" class="btn btn-secondary save">Save</button>
+                </div>
+                <div>
+                    <a href="/analyze" class="btn btn-primary analyze" role="button">Analyze</a>
+                </div>
+                <div class="message">
+                </div>
+            </div>
+        </div>
+    </div>

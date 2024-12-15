@@ -1,0 +1,17 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+*~
+\#*
+hex.c
+node_modules/
+*.db
+*.db-shm
+*.db-wal
+db_design.ods

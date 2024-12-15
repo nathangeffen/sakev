@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+<h1>Find opponent</h1>
+
+<div id="find-opponent-1">
+    <input class="selectSpecification" type="text" disabled />
+    <div>
+        <button type="button" class='btn btn-secondary selectSavedPositionButton'>
+            Select a saved position
+        </button>
+    </div>
+    <div>
+        <button class="btn btn-primary placePool">Enter playing pool</button>
+    </div>
+
+    <div class="table-responsive col-xs-12 col-sm-6">
+        <table class="pool table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    {% include  "selectPosition.html" %}
+</div>
+
+
+{% endblock %}
+
+{% block footerscripts %}
+    {{ super() }}
+    <script type="module">
+        import {createGameUX} from "/js/ux.js";
+        const gameUX = createGameUX('find-opponent-1');
+    </script>
+{% endblock %}

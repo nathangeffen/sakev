@@ -1,0 +1,26 @@
+<form class="positionForm">
+    <div class="mb-3">
+        <label class="form-label" for="files">Files</label>
+        <div class="col-sm-3">
+            <input class="form-control" type="number" name="files" min="1" max="100" step="1" value="9">
+        </div>
+        <label class="form-label" for="ranks">Ranks</label>
+        <div class="col-sm-3">
+            <input class="form-control" type="number" name="ranks" min="1" max="100" step="1" value="9">
+        </div>
+        <div class="col-sm-9">
+            <label class="form-label">Or enter a
+                position
+                string</label>
+            <input class="form-control selectSpecification" type="text" name="selectSpecification">
+            <button type="button" class='btn btn-secondary selectSavedPositionButton'>Select
+                a saved
+                position</button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Create board" class="btn btn-primary position-setup-form-submit" />
+    </div>
+</form>
+
+{% include "selectPosition.html" %}

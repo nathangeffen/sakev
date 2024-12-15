@@ -1,0 +1,79 @@
+<div class="setup-board-form">
+    <div class="position-context col-sm-6">
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="side-to-play">Side to
+                play</label>
+            <div class="col-sm-5">
+                <select required class="form-select-xs" name="side-to-play">
+                    <option value="south">South</option>
+                    <option value="north">North</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="start-score-south">
+                Start score for south
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="100" step="1"
+                    name="start-score-south">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="start-score-north">
+                Start score for north
+            </label>
+            <div class="col-sm-5">
+                <input class="form-control-xs" type="number" min="0" max="100" step="1" name="start-score-north">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="win-score-south">
+                Win score for south
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="100" step="1" name="win-score-south">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="win-score-north">
+                Win score for north
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="100" step="1" name="win-score-north">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="ply">
+                Start ply
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="999" step="1" name="ply">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="ply-last">
+                Ply when last points scored
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="999" step="1" name="ply-last">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="ply-count">
+                Ply count without points scored until draw
+            </label>
+            <div class="col-sm-5">
+                <input required class="form-control-xs" type="number" min="0" max="999" step="1" name="ply-count">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label-xs" for="repeat">
+                Piece may move back to square it was on last move
+            </label>
+            <div class="col-sm-5">
+                <input class="form-control-xs" type="checkbox" name="repeat">
+            </div>
+        </div>
+    </div>
+</div>
