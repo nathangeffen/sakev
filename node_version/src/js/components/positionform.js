@@ -11,20 +11,35 @@ export class PositionForm {
         }
     }
     createPosition(formData) {
+        const createGame = function () {
+            gameUX.game = newGameWithMoves(position);
+            gameUX.components['board']?.setup();
+            gameUX.update();
+        };
         const gameUX = this.gameUX;
         const files = Number(formData.get('files'));
         const ranks = Number(formData.get('ranks'));
-        let specification = String(formData.get('selectSpecification'));
+        let specificationName = String(formData.get('selectSpecification'));
         let position;
-        if (specification !== null && specification > "") {
-            position = loadPosition(specification);
+        if (specificationName !== null && specificationName > "") {
+            fetch("/getspecification", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    name: specificationName
+                })
+            }).then((response) => response.json()).
+                then((specification) => {
+                position = loadPosition(specification);
+                createGame();
+            });
         }
         else {
             position = loadEmptyPosition(files, ranks);
+            createGame();
         }
-        gameUX.game = newGameWithMoves(position);
-        gameUX.components['board']?.setup();
-        gameUX.update();
     }
     addEvents() {
         const positionForm = this;

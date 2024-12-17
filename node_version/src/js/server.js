@@ -63,6 +63,12 @@ app.get('/loadpositions', (_, res) => {
     const rows = db.prepare("SELECT name, specification FROM position").all();
     res.json(rows);
 });
+app.post('/getspecification', (req, res) => {
+    const row = db.prepare(`
+                SELECT specification FROM position
+                WHERE name = ?`).get(req.body.name);
+    res.json(row.specification);
+});
 app.post('/saveposition', (req, res) => {
     const specification = req.body['specification'];
     const hashSpecification = function () {

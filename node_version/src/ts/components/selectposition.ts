@@ -1,9 +1,4 @@
 import {
-  Position, loadPosition, loadEmptyPosition,
-  newGameWithMoves
-} from "../game.js";
-
-import {
   GameUX
 } from "../gameux.js";
 

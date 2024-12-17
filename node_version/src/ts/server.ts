@@ -77,6 +77,13 @@ app.get('/loadpositions', (_, res) => {
         res.json(rows);
 });
 
+app.post('/getspecification', (req, res) => {
+        const row: any = db.prepare(`
+                SELECT specification FROM position
+                WHERE name = ?`).get(req.body.name);
+        res.json(row.specification);
+});
+
 app.post('/saveposition', (req, res) => {
 
         const specification = req.body['specification'];
