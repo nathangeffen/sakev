@@ -21,8 +21,8 @@ export const NORTH_BISHOP_IMAGE = '/images/Chess_bdt45.svg';
 export const BLOCKED_SQUARE_IMAGE = '/images/cross-svgrepo-com.svg';
 export const FROZEN_SQUARE_IMAGE = '/images/cross-frozen.svg';
 
-export const DIV_X_MARGIN = 50;
-export const DIV_Y_MARGIN = 200;
+export const DIV_X_MARGIN = 40;
+export const DIV_Y_MARGIN = 40;
 
 // Types and enums
 
