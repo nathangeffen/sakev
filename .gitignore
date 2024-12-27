@@ -17,5 +17,5 @@ node_modules/
 db_design.ods
 local_settings.js
 local_settings.ts
-node_version/src/js/*
+node_version/js/*
 

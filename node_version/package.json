@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "PORT=3000 DB=sakev.db ./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run build\"",
-    "prod": "NODE_ENV=production PORT=3000 DB=sakev.db node src/js/sakev.js",
-    "build": "tsc && node src/js/sakev.js",
+    "prod": "NODE_ENV=production PORT=3000 DB=sakev.db node js/sakev.js",
+    "build": "tsc && node js/sakev.js",
     "test": "PORT=0 DB=test.db vitest"
   },
   "keywords": [],
