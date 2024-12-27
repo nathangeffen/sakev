@@ -49,7 +49,6 @@ export class PlacePool {
     });
 
     this.gameUX.socket.on('placePool', (entries: PoolEntry[]) => {
-      console.log("Entries:", entries);
       this.gameUX.components['pool'].setEntries(entries, this.gameUX.socket.id);
     });
 

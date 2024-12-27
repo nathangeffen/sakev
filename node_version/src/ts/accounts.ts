@@ -28,7 +28,6 @@ const isAnonymousUser = function(username: string) {
 }
 
 const dbUserExists = function(user: string, key: string) {
-  console.log("user, key", user, key);
   const row = db.prepare(`
               SELECT A.username
               FROM users A, sessions B

@@ -12,7 +12,6 @@ import { Server } from 'socket.io';
 import Database from 'better-sqlite3';
 
 let __dirname = dirname(fileURLToPath(import.meta.url));
-console.log(__dirname);
 if (__dirname.endsWith('/js')) {
   __dirname = join(__dirname, '..');
 };
@@ -29,7 +28,6 @@ export const db = new Database(database);
 app.use(express.json());
 
 const viewDir = join(__dirname, 'src/views');
-console.log(viewDir);
 
 nunjucks.configure(viewDir, {
   autoescape: true,
