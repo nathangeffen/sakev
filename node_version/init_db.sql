@@ -1,15 +1,25 @@
 PRAGMA journal_mode = wal;
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
-  username TEXT UNIQUE NOT NULL
+  username TEXT UNIQUE,
+  email TEXT UNIQUE,
+  display TEXT UNIQUE,
+  anonymous BOOLEAN DEFAULT TRUE NOT NULL
 );
 
+CREATE INDEX username_index ON users (username);
+
 CREATE TABLE IF NOT EXISTS sessions (
-  session TEXT UNIQUE NOT NULL,
-  user_id INTEGER DEFAULT 0 NOT NULL,
+  username INTEGER DEFAULT 0 NOT NULL,
+  key TEXT NOT NULL,
+  identifying_info TEXT,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  PRIMARY KEY(session, user_id)
+  FOREIGN KEY (username) REFERENCES users (username)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  PRIMARY KEY(username, key)
 );
 
 CREATE TABLE IF NOT EXISTS game (
@@ -69,4 +79,8 @@ CREATE TABLE IF NOT EXISTS gamesearch (
 
 INSERT INTO position (name, specification) VALUES(
   'DEFAULT',
-  '1#9x9#rrbbrbbrr_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_RRBBRBBRR#010102020302020101000000000000000000000000000000000000000000000300000000000000000000000000000000003000000000000000000000000000000000000000000000101020203020201010#x_x_x_x_x_x_x_x_x_xbx_x_xbx_x_x_x_x_x_x_b_x_x_x_x_x_x_xbx_x_xbx_x_x_x_x_x_x_x_x_x#s#0-1#8-8#0#t#0-32#f')
+  '1#9x9#rrbbrbbrr_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_RRBBRBBRR#010102020302020101000000000000000000000000000000000000000000000300000000000000000000000000000000003000000000000000000000000000000000000000000000101020203020201010#x_x_x_x_x_x_x_x_x_xbx_x_xbx_x_x_x_x_x_x_b_x_x_x_x_x_x_xbx_x_xbx_x_x_x_x_x_x_x_x_x#s#0-1#8-8#0#t#0-32#f');
+
+INSERT INTO position (name, specification) VALUES(
+  'TEST',
+  '1#4x3#rbx_x_x_x_BR#000002010000000010200000#x_x_xbb_x_x_#s#0-0#3-3#0#t#0-4#f');

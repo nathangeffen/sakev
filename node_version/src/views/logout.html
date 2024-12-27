@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user %}
+<p>User {{user}} has been logged out</p>
+{% else %}
+<p>Not logged in {{request}} {{req}} {{res}} {{response}} </p>
+{% endif %}
+
+{% endblock %}

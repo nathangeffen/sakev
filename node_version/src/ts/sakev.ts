@@ -1,35 +1,8 @@
-import express from 'express';
-import { createServer } from 'node:http';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-import { Server } from 'socket.io';
-import Database from 'better-sqlite3';
+import { port, app, server, io, db, cookieSession, cookieParser } from "./server.js";
+import './accounts.js';
 import { DEFAULT_POSITION_STRING } from './game.js';
 import { PoolEntry, GameDetails, TransmitMove } from "./common.js";
-import { createRequire } from "module";
 import { GameUXState } from './gameux.js';
-const require = createRequire(import.meta.url);
-const nunjucks = require('nunjucks');
-
-const port = Number(process.env.PORT || 0);
-const database = process.env.DB;
-const app = express();
-const server = createServer(app);
-const io = new Server(server);
-const db = new Database(database);
-
-
-let __dirname = dirname(fileURLToPath(import.meta.url));
-if (__dirname.endsWith('/js')) {
-        __dirname = join(__dirname, '..');
-};
-
-app.use(express.json());
-
-nunjucks.configure(join(__dirname, 'views'), {
-        autoescape: true,
-        express: app
-});
 
 app.get('/', (_, res) => {
         res.render('index.html', { title: 'Home' });
@@ -73,15 +46,11 @@ app.get('/position', (_, res) => {
 
 
 app.get('/loadpositions', (_, res) => {
-        const rows = db.prepare("SELECT name, specification FROM position").all();
-        res.json(rows);
+        res.json(dbAllPositions());
 });
 
 app.post('/getspecification', (req, res) => {
-        const row: any = db.prepare(`
-                SELECT specification FROM position
-                WHERE name = ?`).get(req.body.name);
-        res.json(row.specification);
+        res.json(dbGetSpecificationUsingName(req.body.name));
 });
 
 app.post('/saveposition', (req, res) => {
@@ -120,7 +89,21 @@ app.get('/getposition', (req, res) => {
 
 });
 
-app.use(express.static(__dirname));
+
+export const dbDeleteExpiredGameSearch = () => {
+        db.prepare("DELETE FROM gamesearch WHERE created <= datetime('now','-5 minute')").run();
+}
+
+export const dbAllPositions = () => {
+        return db.prepare("SELECT name, specification FROM position").all();
+}
+
+export const dbGetSpecificationUsingName = (name: string) => {
+        const row: any = db.prepare(`
+                SELECT specification FROM position
+                WHERE name = ?`).get(name);
+        return row?.specification;
+}
 
 export const dbCreatePosition = function(name: string, specification: string) {
         db.prepare("INSERT INTO position(name, specification) VALUES(?,?)").
@@ -256,11 +239,16 @@ io.on('connection', (socket) => {
 
 setInterval(() => {
         (async () => {
-                db.prepare("DELETE FROM gamesearch WHERE created <= datetime('now','-5 minute')").run();
+                dbDeleteExpiredGameSearch();
         })().then(() => {
                 io.emit('placePool', dbGetPoolEntries());
         });
 }, 10000);
+
+app.use((_, res, __) => {
+        res.status(404).send(
+                "<h1>Page not found</h1>")
+})
 
 if (port !== 0) {
         server.listen(port, () => {
