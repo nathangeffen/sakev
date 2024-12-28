@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "PORT=3000 DB=sakev.db ./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run build\"",
+    "dev": "PORT=3000 DB=sakev.db ./node_modules/nodemon/bin/nodemon.js -e ts -e html  --exec \"npm run build\"",
     "prod": "NODE_ENV=production PORT=3000 DB=sakev.db node js/sakev.js",
     "build": "tsc && node js/sakev.js",
     "test": "PORT=0 DB=test.db vitest"

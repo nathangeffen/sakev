@@ -6,8 +6,13 @@ import { randomBytes } from 'node:crypto';
 
 app.use(cookieParser(SECRET_KEY));
 
-const logoutURL = join(ACCOUNTS_ROOT, '/logout');
-const forceLogoutURL = join(ACCOUNTS_ROOT, '/force_logout');
+const ACCOUNTS_URL_ROOT = `/${ACCOUNTS_ROOT}`;
+const loginURL = join(ACCOUNTS_URL_ROOT, '/login');
+const loginView = join(ACCOUNTS_ROOT, '/login.html');
+const alreadyLoggedInView = join(ACCOUNTS_ROOT, '/already_logged_in.html');
+const logoutURL = join(ACCOUNTS_URL_ROOT, '/logout');
+const logoutView = join(ACCOUNTS_ROOT, '/logout.html');
+const forceLogoutURL = join(ACCOUNTS_URL_ROOT, '/force_logout');
 
 
 const cookieParms: any = {
@@ -88,14 +93,13 @@ const dbCreateAnonymousUser = (key: string, identifyingInfo: string) => {
 }
 
 
-const isValidUser = function(req: Request) {
-  if (!('user' in req.signedCookies) || !req.signedCookies.user) return false;
-  if (!('key' in req.signedCookies) || !req.signedCookies.key) return false;
-  if (!dbUserExists(req.signedCookies.user,
-    req.signedCookies.key)) return false;
-  return true;
+const getUser = function(req: Request): string | null {
+  if (!('user' in req.signedCookies) || !req.signedCookies.user) return null;
+  if (!('key' in req.signedCookies) || !req.signedCookies.key) return null;
+  if (!dbUserExists(req.signedCookies.user, req.signedCookies.key))
+    return req.signedCookies.user;
+  return null;
 }
-
 
 const createAnonymousUser = function(req: Request, res: Response) {
   const key = getRandomString();
@@ -107,8 +111,8 @@ const createAnonymousUser = function(req: Request, res: Response) {
 }
 
 app.use((req, res, next) => {
-  if (req.url !== logoutURL) {
-    if (isValidUser(req) === false) {
+  if (!(req.url in [loginURL, forceLogoutURL, logoutURL])) {
+    if (!getUser(req)) {
       createAnonymousUser(req, res);
     }
   }
@@ -121,21 +125,33 @@ app.use(function(req: Request, res: Response, next) {
   next();
 })
 
+app.get(loginURL, (req, res) => {
+  const user = getUser(req);
+  if (user && !isAnonymousUser(user)) {
+    res.render(alreadyLoggedInView, {
+      'user': user
+    });
+    return;
+  }
+  res.render(loginView, {
+    'user': getUser(req)
+  });
+});
+
 app.get(logoutURL, (req, res) => {
-  let user = "";
-  if (isValidUser(req) && !isAnonymousUser(req.signedCookies.user)) {
-    user = req.signedCookies.user;
+  let user = getUser(req);
+  if (user && !isAnonymousUser(req.signedCookies.user)) {
     clearUserLoginCookies(res);
   }
-  res.render('logout.html', {
+  res.render(logoutView, {
     'user': user
   });
 });
 
 app.get(forceLogoutURL, (req, res) => {
-  let user = req.signedCookies?.user || "";
+  let user = getUser(req);
   clearUserLoginCookies(res);
-  res.render('logout.html', {
+  res.render(logoutView, {
     'user': user
   });
 });

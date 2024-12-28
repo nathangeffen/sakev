@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user %}
+<p>You are already logged in as {{user}}.</p>
+{% else %}
+<p>You are not logged in.</p>
+{% endif %}
+
+
+{% endblock %}

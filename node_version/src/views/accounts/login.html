@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h1>Login or register</h1>
+            <div>
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="email" name="email">
+                        <div id="emailHelp" class="form-text">We will not share your email with anyone else.</div>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Send me a login link">
+                </form>
+            </div>
+
+            <hr />
+
+            <div class="mt-2">
+
+                <p>We send you an email with a link. If you click it and you
+                    already have an account with that email address, you will
+                    be logged in. If not, we create an account for you and log
+                    you in. </p>
+
+                <p class="text-start"> We will not provide your data to anyone
+                    else unless ordered by a court.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
