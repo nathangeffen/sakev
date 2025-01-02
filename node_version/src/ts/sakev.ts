@@ -1,4 +1,4 @@
-import { port, app, server, io, db, cookieSession, cookieParser } from "./server.js";
+import { port, app, server, io, db } from "./server.js";
 import './accounts.js';
 import { DEFAULT_POSITION_STRING } from './game.js';
 import { PoolEntry, GameDetails, TransmitMove } from "./common.js";

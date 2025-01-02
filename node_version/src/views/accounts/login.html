@@ -5,12 +5,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-6">
+            {% if post  and not error %}
+            <h2>Email sent to {{email}}.</h2>
+            {% else %}
             <h1>Login or register</h1>
+            {% if error %}
+            <div class="alert alert-danger">{{error}}</div>
+            {% endif %}
             <div>
-                <form>
+                <form method="post" action="/accounts/login">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input class="form-control" type="email" id="email" name="email">
+                        <input class="form-control" type="email" id="email" required name="email">
                         <div id="emailHelp" class="form-text">We will not share your email with anyone else.</div>
                     </div>
                     <input class="btn btn-primary" type="submit" value="Send me a login link">
@@ -30,6 +36,7 @@
                     else unless ordered by a court.</p>
 
             </div>
+        {% endif %}
         </div>
     </div>
 </div>

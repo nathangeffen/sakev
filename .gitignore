@@ -15,7 +15,6 @@ node_modules/
 *.db-shm
 *.db-wal
 db_design.ods
-local_settings.js
-local_settings.ts
+local_settings.sql
 node_version/js/*
 

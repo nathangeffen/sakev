@@ -1,5 +1,5 @@
 #/bin/sh
 
-rm "$1"*
-sqlite3 $1 < init_db.sql
+rm "$1".db*
+sqlite3 $1.db < init_db.sql
 
